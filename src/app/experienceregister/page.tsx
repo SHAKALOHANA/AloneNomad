@@ -11,29 +11,7 @@ import 'react-day-picker/dist/style.css';
 import DaumPostcode from 'react-daum-postcode';
 import CustomButton from '../../components/CustomButton';
 import { instance } from '../../app/api/instance';
-import {
-  mainContainer,
-  sideContainer,
-  contentContainer,
-  discriptionContainer,
-  dateContainer,
-  reservationContainer,
-  addedDateWrapper,
-  addedDateContainer,
-  calendarWrapper,
-  line,
-  postSearchButton,
-  imageRegister,
-  bannerContainer,
-  introContainer,
-  images,
-  deleteButton,
-  qqq,
-  inputWithPlaceholder,
-  tildeSymbol,
-  addedStartTimeContainer,
-  addedEndTimeContainer,
-} from './page.css';
+import * as S from './page.css';
 
 interface Schedule {
   date: string;
@@ -231,17 +209,17 @@ const ExperienceRegister = () => {
 
   return (
     <div>
-      <div className={mainContainer}>
+      <div className={S.mainContainer}>
         {!isMobile && <SideNavigationMenu />}
-        <div className={sideContainer}>
-          <div className={qqq}>
+        <div className={S.sideContainer}>
+          <div className={S.qqq}>
             <h1>내 체험 등록</h1>
             <CustomButton mode="experienceRegistration" onClick={handleSubmit}>
               등록하기
             </CustomButton>
           </div>
           <input
-            className={`${contentContainer} ${inputWithPlaceholder}`}
+            className={`${S.contentContainer} ${S.inputWithPlaceholder}`}
             type="text"
             placeholder="제목"
             style={{ marginBottom: '20px' }}
@@ -249,14 +227,14 @@ const ExperienceRegister = () => {
           />
           <CategoryDropDown onCategorySelect={handleCategoryChange} />
           <textarea
-            className={`${discriptionContainer} ${inputWithPlaceholder}`}
+            className={`${S.descriptionContainer} ${S.inputWithPlaceholder}`}
             placeholder="설명"
             onChange={handleDescriptionChange}
           />
 
           <h2>가격</h2>
           <input
-            className={`${contentContainer} ${inputWithPlaceholder}`}
+            className={`${S.contentContainer} ${S.inputWithPlaceholder}`}
             type="text"
             placeholder="가격"
             value={price}
@@ -269,13 +247,16 @@ const ExperienceRegister = () => {
           <h2>주소</h2>
           <div style={{ position: 'relative' }}>
             <input
-              className={`${contentContainer} ${inputWithPlaceholder}`}
+              className={`${S.contentContainer} ${S.inputWithPlaceholder}`}
               type="text"
               placeholder="주소를 입력해주세요"
               value={address}
               readOnly
             />
-            <button className={postSearchButton} onClick={handlePostcodeClick}>
+            <button
+              className={S.postSearchButton}
+              onClick={handlePostcodeClick}
+            >
               우편번호 검색
             </button>
           </div>
@@ -284,8 +265,8 @@ const ExperienceRegister = () => {
           )}
 
           <h2>예약 가능한 시간대</h2>
-          <div className={reservationContainer}>
-            <div className={dateContainer}>
+          <div className={S.reservationContainer}>
+            <div className={S.dateContainer}>
               <p
                 style={{
                   color: selectedDate ? 'black' : '#a1a1a1',
@@ -311,7 +292,7 @@ const ExperienceRegister = () => {
                 onClick={handleCalendarClick}
               />
               {isCalendarVisible && (
-                <div className={calendarWrapper}>
+                <div className={S.calendarWrapper}>
                   <DayPicker
                     selected={selectedDate}
                     onDayClick={(date) => {
@@ -323,7 +304,7 @@ const ExperienceRegister = () => {
               )}
             </div>
             <StartTimeDropDown onChange={setStartTime} selected={startTime} />
-            <p className={tildeSymbol}>~</p>
+            <p className={S.tildeSymbol}>~</p>
             <EndTimeDropDown onChange={setEndTime} selected={endTime} />
             <Image
               src="../../../icons/plusbutton.svg"
@@ -347,16 +328,18 @@ const ExperienceRegister = () => {
               }}
             />
           </div>
-          <div className={line}></div>
+          <div className={S.line}></div>
           <div>
             {dates.map((dateInfo, index) => (
-              <div key={index} className={addedDateWrapper}>
-                <div className={addedDateContainer}>{dateInfo.date}</div>
-                <div className={addedStartTimeContainer}>
+              <div key={index} className={S.addedDateWrapper}>
+                <div className={S.addedDateContainer}>{dateInfo.date}</div>
+                <div className={S.addedStartTimeContainer}>
                   {dateInfo.startTime}
                 </div>
-                <p className={tildeSymbol}>~</p>
-                <div className={addedEndTimeContainer}>{dateInfo.endTime}</div>
+                <p className={S.tildeSymbol}>~</p>
+                <div className={S.addedEndTimeContainer}>
+                  {dateInfo.endTime}
+                </div>
                 <Image
                   src="../../../icons/minusbutton.svg"
                   alt="빼기버튼"
@@ -370,8 +353,8 @@ const ExperienceRegister = () => {
           </div>
 
           <h2>배너 이미지</h2>
-          <div className={bannerContainer}>
-            <label htmlFor="banner-upload" className={imageRegister}>
+          <div className={S.bannerContainer}>
+            <label htmlFor="banner-upload" className={S.imageRegister}>
               <input
                 id="banner-upload"
                 type="file"
@@ -384,17 +367,15 @@ const ExperienceRegister = () => {
             {previewUrl && (
               <div style={{ position: 'relative' }}>
                 <Image
-                  className={images}
+                  className={S.images}
                   layout="intrinsic"
-                  width={180}
-                  height={180}
                   src={previewUrl}
                   alt="배너 이미지"
                 />
                 <Image
                   src="../../../icons/xbutton.svg"
                   alt="삭제 버튼"
-                  className={deleteButton}
+                  className={S.deleteButton}
                   layout="intrinsic"
                   width={40}
                   height={40}
@@ -409,8 +390,8 @@ const ExperienceRegister = () => {
           </div>
 
           <h2>소개 이미지</h2>
-          <div className={introContainer}>
-            <label htmlFor="intro-upload" className={imageRegister}>
+          <div className={S.introContainer}>
+            <label htmlFor="intro-upload" className={S.imageRegister}>
               <input
                 id="intro-upload"
                 type="file"
@@ -424,17 +405,15 @@ const ExperienceRegister = () => {
             {introImages.map((image, index) => (
               <div key={index} style={{ position: 'relative' }}>
                 <Image
-                  className={images}
+                  className={S.images}
                   src={URL.createObjectURL(image)}
                   alt={`소개 이미지 ${index + 1}`}
                   layout="intrinsic"
-                  width={180}
-                  height={180}
                 />
                 <Image
                   src="../../../icons/xbutton.svg"
                   alt="이미지 삭제"
-                  className={deleteButton}
+                  className={S.deleteButton}
                   layout="intrinsic"
                   width={40}
                   height={40}

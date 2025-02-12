@@ -43,7 +43,7 @@ export const contentContainer = style({
   padding: '0px 10px',
 });
 
-export const discriptionContainer = style({
+export const descriptionContainer = style({
   width: '100%',
   height: '346px',
   backgroundColor: theme.colors.white,
@@ -341,4 +341,3 @@ export const addedEndTimeContainer = style({
     },
   },
 });
-
